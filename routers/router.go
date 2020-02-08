@@ -7,6 +7,9 @@ import (
 )
 
 func init() {
+	//login
+	beego.Router("/login", &controllers.LoginController{}, "*:Index")
+
 	//home
 	beego.Router("/", &controllers.HomeController{}, "Get:Index")
 
@@ -32,9 +35,6 @@ func init() {
 	beego.Router("/format/edit", &controllers.FormatController{}, "Get:Edit")
 	beego.Router("/format/examples", &controllers.FormatController{}, "Get:Examples")
 	beego.Router("/format/editdo", &controllers.FormatController{}, "*:EditDo")
-
-	//login
-	beego.Router("/login", &controllers.LoginController{}, "*:Index")
 
 	//list
 	beego.Router("/data/?:mid", &controllers.DataController{}, "Get:Index")

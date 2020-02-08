@@ -22,7 +22,9 @@ func (c *BaseController) Prepare() {
 	//附值
 	c.controllerName, c.actionName = c.GetControllerAndAction()
 	beego.Informational(c.controllerName, c.actionName)
+	// 用户权限验证 执行控制器的action 都会先执行Prepare
 	user := c.auth()
+	// 根据用户权限 展示菜单列表
 	c.Data["Menu"] = models.MenuTreeStruct(user)
 }
 
@@ -71,7 +73,7 @@ func (c *BaseController) listJsonResult(code consts.JsonResultCode, msg string, 
 }
 
 func (c *BaseController) auth() models.UserModel {
-	user := c.GetSession("xcmsuser")
+	user := c.GetSession(sessionName)
 	beego.Debug("base auth" + c.controllerName)
 	beego.Debug(user)
 	if user == nil {

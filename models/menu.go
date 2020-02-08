@@ -72,11 +72,12 @@ func MenuList() ([]*MenuModel, int64) {
 	return data, total
 }
 
+// 父菜单列表
 func ParentMenuList() []*MenuModel {
+	// parent = 0
 	query := orm.NewOrm().QueryTable(TbNameMenu()).Filter("parent", 0)
 	data := make([]*MenuModel, 0)
 	query.OrderBy("-seq").Limit(1000).All(&data)
-
 	return data
 }
 
